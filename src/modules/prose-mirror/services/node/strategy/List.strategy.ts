@@ -31,13 +31,15 @@ class ListStrategy implements NodeStrategy {
 			const resolvedFrom = state.doc.resolve(state.selection.$from.pos);
 			const parentFrom = findParentNodeOfType(resolvedFrom.parent.type)(view);
 			const liType = (state as AdvancedEditorState).config.schema.nodes.li;
-			const text = (state as AdvancedEditorState).config.schema.text;
 
 			if (parentFrom) {
 				const lies: Node[] = [liType.create(
 					null,
-					[text(parentFrom.node.textContent || ' ')],
+					[(state as AdvancedEditorState).config.schema.text(
+						parentFrom.node.textContent || ' ',
+					)],
 				)];
+
 
 				const ul = type.create(null, lies);
 				const transaction = state.tr;
@@ -62,7 +64,6 @@ class ListStrategy implements NodeStrategy {
 			const nodeFromData = findParentNodeClosestToPosition(resolvedFrom);
 			const nodeToData = findParentNodeClosestToPosition(resolvedTo);
 			const liType = (state as AdvancedEditorState).config.schema.nodes.li;
-			const text = (state as AdvancedEditorState).config.schema.text;
 			const lies: Node[] = [];
 
 			if (nodeFromData && nodeToData) {
@@ -73,7 +74,7 @@ class ListStrategy implements NodeStrategy {
 						if (node.isText) {
 							lies.push(liType.create(
 								null,
-								[text(node.textContent)],
+								[(state as AdvancedEditorState).config.schema.text(node.textContent)],
 							));
 						}
 					},
@@ -111,16 +112,17 @@ class ListStrategy implements NodeStrategy {
 			const list = findParentNodeOfType(type)(view);
 			const listItem = findParentNodeOfType(resolved.parent.type)(view);
 			const paragraphType = (state as AdvancedEditorState).config.schema.nodes.paragraph;
-			const text = (state as AdvancedEditorState).config.schema.text;
 
 			if (list) {
 				const nodeForDeleting = this.hasOnlyOneListItem(list.node)
 					? list
 					: listItem;
 	
-				const defaultType = paragraphType.create(
+				const paragraph = paragraphType.create(
 					null,
-					[text(listItem?.node.textContent || ' ')],
+					[(state as AdvancedEditorState).config.schema.text(
+						listItem?.node.textContent || ' ',
+					)],
 				);
 	
 				if (nodeForDeleting) {
@@ -129,7 +131,7 @@ class ListStrategy implements NodeStrategy {
 					transaction.replaceRangeWith(
 						nodeForDeleting.position,
 						nodeForDeleting.position + nodeForDeleting.node.nodeSize, 
-						defaultType,
+						paragraph,
 					);
 		
 					view.dispatch(transaction);
@@ -150,7 +152,6 @@ class ListStrategy implements NodeStrategy {
 			const nodesInsteadLi: any[] = [];
 			const liType = (state as AdvancedEditorState).config.schema.nodes.li;
 			const paragraphType = (state as AdvancedEditorState).config.schema.nodes.paragraph;
-			const text = (state as AdvancedEditorState).config.schema.text;
 			const transaction = state.tr;
 
 			if (nodeFromData && nodeToData) {
@@ -167,7 +168,9 @@ class ListStrategy implements NodeStrategy {
 								to: start + node.nodeSize,
 								node: paragraphType.create(
 									null,
-									[text(node.textContent || ' ')],
+									[(state as AdvancedEditorState).config.schema.text(
+										node.textContent || ' ',
+									)],
 								),
 							});
 						}

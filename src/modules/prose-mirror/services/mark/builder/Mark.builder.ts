@@ -17,7 +17,6 @@ class MarkBuilder {
 		return this;
 	}
 
-
 	public setMenuPreset(preset: MarkBuilderMenuPreset): this {
 		this.menuPreset = preset;
 		return this;

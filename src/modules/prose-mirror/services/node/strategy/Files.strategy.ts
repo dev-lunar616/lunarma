@@ -77,13 +77,13 @@ class FilesStrategy extends BaseStrategy implements NodeStrategy {
 			const { state } = view;
 			const resolvedFrom = state.doc.resolve(state.selection.$from.pos);
 			const resolvedTo = state.doc.resolve(state.selection.$to.pos);
-			const defaultType = (state as AdvancedEditorState).config.schema.nodes.paragraph;
+			const paragraph = (state as AdvancedEditorState).config.schema.nodes.paragraph;
 			const transaction = state.tr;
 
 			transaction.replaceWith(
 				resolvedFrom.pos, 
 				resolvedTo.pos,
-				defaultType.create(),
+				paragraph.create(),
 			)
 
 			view.dispatch(transaction);

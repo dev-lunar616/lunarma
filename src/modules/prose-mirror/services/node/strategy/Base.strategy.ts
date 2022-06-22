@@ -50,11 +50,11 @@ class BaseStrategy implements NodeStrategy {
 	) => void {
 		return view => {
 			const { state } = view;
-			const defaultType = (state as AdvancedEditorState).config.schema.nodes.paragraph;
+			const paragraph = (state as AdvancedEditorState).config.schema.nodes.paragraph;
 			const resolvedFrom = state.doc.resolve(state.selection.$from.pos);
 
 			if (resolvedFrom.parent.isTextblock) {
-				setBlockType(defaultType)(view.state, view.dispatch, view);
+				setBlockType(paragraph)(view.state, view.dispatch, view);
 			} else {
 				const resolvedTo = state.doc.resolve(state.selection.$to.pos);
 				const transaction = state.tr;
@@ -62,7 +62,7 @@ class BaseStrategy implements NodeStrategy {
 				transaction.replaceWith(
 					resolvedFrom.pos, 
 					resolvedTo.pos,
-					defaultType.create(),
+					paragraph.create(),
 				);
 	
 				view.dispatch(transaction);
@@ -75,12 +75,11 @@ class BaseStrategy implements NodeStrategy {
 	): (view: EditorView) => void {
 		return view => {
 			const { state } = view;
-			const defaultType = (state as AdvancedEditorState).config.schema.nodes.paragraph;
+			const paragraph = (state as AdvancedEditorState).config.schema.nodes.paragraph;
 			const resolvedFrom = state.doc.resolve(state.selection.$from.pos);
 			const resolvedTo = state.doc.resolve(state.selection.$to.pos);
 			const nodeFromData = findParentNodeClosestToPosition(resolvedFrom);
 			const nodeToData = findParentNodeClosestToPosition(resolvedTo);
-			const text = (state as AdvancedEditorState).config.schema.text;
 			const transaction = state.tr;
 
 			if (nodeFromData && nodeToData) {
@@ -99,9 +98,11 @@ class BaseStrategy implements NodeStrategy {
 								transaction.replaceWith(
 									transaction.mapping.map(node.position), 
 									transaction.mapping.map(node.position) + node.node.nodeSize,
-									defaultType.create(
+									paragraph.create(
 										null,
-										[text(node.node.textContent || ' ')],
+										[(state as AdvancedEditorState).config.schema.text(
+											node.node.textContent || ' ',
+										)],
 									),
 								);
 							}
