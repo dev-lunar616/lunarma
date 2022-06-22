@@ -1,0 +1,22 @@
+{
+	"extends": "@vue/tsconfig/tsconfig.web.json",
+	"include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["./src/*"],
+			"@prose-mirror/*": [".src/modules/prose-mirror/*"],
+		},
+		"types": ["node"],
+		"target": "esnext",
+		"module": "esnext",
+		"strictPropertyInitialization": false,
+		"strict": true,
+	},
+
+	"references": [
+		{
+			"path": "./tsconfig.vite-config.json"
+		}
+	]
+}
