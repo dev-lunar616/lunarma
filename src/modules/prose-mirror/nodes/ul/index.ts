@@ -49,4 +49,6 @@ const ul = new NodeBuilder()
 	}))
 	.build();
 
-export default ul;
+export {
+	ul,
+}

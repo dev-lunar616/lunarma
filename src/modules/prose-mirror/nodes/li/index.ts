@@ -1,4 +1,4 @@
-import { Plugin, TextSelection } from 'prosemirror-state';
+import { Plugin } from 'prosemirror-state';
 
 import { NodeBuilder } from '@/modules/prose-mirror/services/node/builder/Node.builder'; 
 
@@ -29,7 +29,7 @@ const li = new NodeBuilder()
 				const li = findParentNodeOfType(liType)(view);
 				const isEnter = event.key === 'Enter';
 
-				if (isEnter && li) {
+				if (isEnter && li && !li.node.textContent) {
 					const transaction = state.tr;
 
 					transaction.replaceWith(
@@ -37,10 +37,6 @@ const li = new NodeBuilder()
 						li.position + li.node.nodeSize,
 						paragraph.create(),
 					);
-					transaction.setSelection(TextSelection.create(
-						view.state.doc, 
-						li.position + 2,
-					));
 
 					view.dispatch(transaction);
 
@@ -53,4 +49,6 @@ const li = new NodeBuilder()
 	}))
 	.build();
 
-export default li;
+export {
+	li,
+}

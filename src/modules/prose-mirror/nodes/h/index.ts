@@ -74,4 +74,6 @@ const h = new NodeBuilder()
 	])
 	.build();
 
-export default h;
+export {
+	h,
+}

@@ -8,4 +8,6 @@ const text = new NodeBuilder()
 	})
 	.build();
 
-export default text;
+export {
+	text,
+}

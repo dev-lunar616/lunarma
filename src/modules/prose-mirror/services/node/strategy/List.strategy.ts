@@ -8,6 +8,7 @@ import type { EditorView } from 'prosemirror-view';
 import type { Node, NodeType } from 'prosemirror-model';
 import type { NodeStrategy } from '@/modules/prose-mirror/services/node/strategy/index.interfaces';
 import type { AdvancedEditorState } from '@/modules/prose-mirror/index.interfaces';
+import type { Transaction } from 'prosemirror-state';
 
 class ListStrategy implements NodeStrategy {
 	private hasOnlyOneListItem(node: any): boolean {
@@ -82,9 +83,16 @@ class ListStrategy implements NodeStrategy {
 	
 				const ul = type.create(null, lies);
 				const transaction = state.tr;
+				// @TODO: @lunar616
+				const testiruem = transaction.doc.nodeAt(nodeFromData.position - 1);
+				let step = 0;
+
+				if (['ul', 'ol'].includes(testiruem?.type.name || '')) {
+					step = 2;
+				}
 
 				transaction.replaceWith(
-					nodeFromData.position,
+					nodeFromData.position - step,
 					nodeToData.position + nodeToData.node.nodeSize,
 					ul,
 				);

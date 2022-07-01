@@ -1,6 +1,9 @@
 import type { MarkSpec } from 'prosemirror-model';
 
-import type { MarkBuilderMenuPreset } from '@/modules/prose-mirror/services/mark/builder/mark.builder.interfaces';
+import type {
+	MarkBuilderItem,
+	MarkBuilderMenuPreset,
+} from '@/modules/prose-mirror/services/mark/builder/mark.builder.interfaces';
 
 class MarkBuilder {
 	public name: string;
@@ -22,8 +25,12 @@ class MarkBuilder {
 		return this;
 	}
 
-	public build(): this {
-		return this;
+	public build(): MarkBuilderItem {
+		return {
+			name: this.name,
+			type: this.type,
+			menuPreset: this.menuPreset,
+		};
 	}
 }
 

@@ -1,7 +1,11 @@
 <template>
 	<div class="header">
 		<div class="header__wrap">
-			<div class="header__main">
+			<div class="header__section side">
+
+			</div>
+
+			<div class="header__section">
 				<RouterLink 
 					:to="{ name: 'home' }"
 					class="header__link-home"
@@ -9,18 +13,12 @@
 					L
 				</RouterLink>
 
-				<RouterLink 
-					:to="{ name: 'notes' }"
-					class="header__link-notes"
-				>
-					<Icon
-						name="Notes"
-						is-clickable
-					/>
-				</RouterLink>
-			</div>
-	
-			<div class="header__side">
+				<Hr 
+					direction="vertical" 
+					design="light"
+					class="header__section-hr"
+				/>
+
 				<RouterLink
 					v-if="userStore.user"
 					:to="{ name: 'user' }"
@@ -40,12 +38,25 @@
 					<Icon name="User" />
 				</RouterLink>
 			</div>
+
+			<div class="header__section side">
+				<RouterLink 
+					:to="{ name: 'notes' }"
+					class="header__link-notes"
+				>
+					<Icon
+						name="Notes"
+						is-clickable
+					/>
+				</RouterLink>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script lang="ts" setup>
 import Icon from '@/ui/items/icon/Icon.vue';
+import Hr from '@/ui/items/hr/Hr.vue';
 import UserAvatar from '@/entities/user/components/avatar/UserAvatar.vue';
 
 import { useUserStore } from '@/entities/user/user.store';
@@ -63,18 +74,24 @@ const userStore = useUserStore();
 
 .header__wrap
 	box-sizing: border-box
-	display: flex
-	justify-content: space-between
+	display: grid
+	grid-template-columns: 1fr max-content 1fr
+	column-gap: 20px
 	align-items: center
 	margin: 0 auto
 	height: 100%
 	max-width: 1440px
 
-.header__main
+.header__section
 	display: flex
-	justify-content: space-between
 	align-items: center
-	width: 50%
+	column-gap: 13px
+
+	&.side
+		justify-content: flex-start
+
+.header__section-hr
+	height: 13px
 
 .header__link-notes,
 .header__link-home

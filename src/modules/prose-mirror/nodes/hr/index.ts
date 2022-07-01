@@ -39,4 +39,6 @@ const hr = new NodeBuilder()
 	.setStrategy(new HrStrategy())
 	.build();
 
-export default hr;
+export {
+	hr,
+}

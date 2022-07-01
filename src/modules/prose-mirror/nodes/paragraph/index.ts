@@ -42,4 +42,6 @@ const paragraph = new NodeBuilder()
 	})
 	.build();
 
-export default paragraph;
+export {
+	paragraph,
+}

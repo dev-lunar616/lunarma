@@ -4,7 +4,7 @@
 			{{ editor?.lastUpdate }}
 		</Text>
 
-		<Hr design="light" />
+		<Hr direction="horizontal" design="light" />
 
 		<div class="prose-mirror-node-info__current-node">
 			<Title :level="4" inline>

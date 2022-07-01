@@ -46,7 +46,7 @@ const handlerButtonAddClick = (
 	return false;
 };
 
-const youtubeLink = new NodeBuilder()
+const youtube_link = new NodeBuilder()
 	.setName('youtube_link')
 	.setTitle('Ссылка на ютуб')
 	.setType({
@@ -154,9 +154,11 @@ const youtubeLink = new NodeBuilder()
 				event: MouseEvent,
 			): boolean {
 				return handlerButtonAddClick(view, position, node, nodePosition, event);
-			}
+			},
 		},
 	}))
 	.build();
 
-export default youtubeLink;
+export {
+	youtube_link
+};

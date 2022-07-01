@@ -5,4 +5,6 @@ const doc = new NodeBuilder()
 	.setType({ content: 'block+' })
 	.build();
 
-export default doc;
+export {
+	doc,
+}

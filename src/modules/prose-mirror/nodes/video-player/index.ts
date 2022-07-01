@@ -5,7 +5,7 @@ import { NodeBuilder } from '@/modules/prose-mirror/services/node/builder/Node.b
 import type { NodeView } from 'prosemirror-view';
 import type { Node } from 'prosemirror-model';
 
-const videoPlayer = new NodeBuilder()
+const video_player = new NodeBuilder()
 	.setName('video_player')
 	.setTitle('Плеер')
 	.setType({
@@ -48,4 +48,6 @@ const videoPlayer = new NodeBuilder()
 	})
 	.build();
 
-export default videoPlayer;
+export {
+	video_player,
+}

@@ -33,7 +33,7 @@ const equalNodeType = (
 };
 
 const findParentNode = (
-	predicate: (node: Node) => boolean
+	predicate: (node: Node) => boolean = () => true,
 ): (view: EditorView) => FindedNodeData | undefined => {
 	return (view: EditorView) => {
 		const { state } = view;

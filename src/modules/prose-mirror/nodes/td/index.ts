@@ -12,4 +12,6 @@ const td = new NodeBuilder()
 	})
 	.build();
 
-export default td;
+export {
+	td,
+}

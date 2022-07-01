@@ -17,4 +17,6 @@ const table = new NodeBuilder()
 	.setStrategy(new TableStrategy())
 	.build();
 
-export default table;
+export {
+	table,
+}

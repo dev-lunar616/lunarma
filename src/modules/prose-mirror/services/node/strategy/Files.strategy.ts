@@ -25,7 +25,6 @@ const plugin = new Plugin({
 			widget.contentEditable = 'false';
 
 			if (action && action.add) {
-				console.log(action.add.position, action.add.id)
 				const decoration = Decoration.widget(
 					action.add.position,
 					widget,

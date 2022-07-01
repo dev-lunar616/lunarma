@@ -39,10 +39,6 @@ const signInForm = new FormService({
 	fields: ['login', 'password'],
 	required: true,
 });
-signInForm.initialize({
-	login: 'lunar616',
-	password: '123',
-})
 
 const setLogin = (value: string) => {
 	signInForm.form.login.value.value = value;
@@ -62,8 +58,6 @@ const signInProxy = async (): Promise<void> => {
 
 	signIsLoading.value = false;
 	console.log('proxy end');
-
-	console.log(userStore)
 };
 </script>
 

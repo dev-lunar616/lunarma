@@ -92,7 +92,10 @@ class EditorService {
 				$this.key.value += 1;
 
 				if (config.update) {
-					config.update(this.state.toJSON());
+					config.update({
+						view: $this.view,
+						stateJSON: this.state.toJSON(),
+					});
 				} 
 			},
 		});

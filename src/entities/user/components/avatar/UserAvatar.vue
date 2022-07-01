@@ -22,7 +22,6 @@ defineProps<{
 
 <style lang="sass" scoped>
 .user-avatar
-	border-radius: 50%
 	border: 1px solid transparent
 	overflow: hidden
 

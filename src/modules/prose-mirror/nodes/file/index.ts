@@ -67,11 +67,12 @@ const file = new NodeBuilder()
 			dom,
 	
 			update: (): boolean => {
-				console.log('update');
 				return false;
 			},
 		};
 	})
 	.build();
 
-export default file;
+export {
+	file,
+}
